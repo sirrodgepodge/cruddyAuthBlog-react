@@ -132,7 +132,7 @@ a:focus {
   display: block !important;
 }
 
-#blog-list {
+.blog-list {
   margin: 87px auto 0;
   padding: 50px;
   width: 100%;

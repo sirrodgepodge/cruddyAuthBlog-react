@@ -50,7 +50,7 @@ class Blog extends Component {
 
   render() {
     return (
-      <ul id="blog-list">
+      <ul className="blog-list">
         <h1>Blog Away :)</h1>
         <AddPostForm title={this.state.title}
                      titleChange={this.updateState.bind(this,'title')}
