@@ -1,3 +1,4 @@
+      //Express and Express middlewares
 const express = require('express'),
       session = require('express-session'),
       MongoStore = require('connect-mongo')(session),
@@ -8,7 +9,15 @@ const express = require('express'),
       compression = require('compression'),
       favicon = require('serve-favicon'),
       cors = require('cors'),
-      dotenv = require('dotenv');
+
+      // environmental variable importing
+      dotenv = require('dotenv'),
+
+      // Webpack imports
+      webpack = require('webpack'),
+      config = require('../webpack.config.dev'),
+      webpackDevMiddleware = require('webpack-dev-middleware'),
+      webpackHotMiddleware = require('webpack-hot-middleware');
 
 
 // Grabs key-value pairs from ".env" folder and sets keys as properties on "process.env" object accessable anywhere in the app
@@ -18,6 +27,14 @@ dotenv.config();
 // Express needs to be instantiated, it's possible to run multiple Express instances in the same node app and have them listen on different ports
 const app = express(),
       serverPort = process.env.PORT || 3000; // If port has been provided by environmental variables use that, else defauly to 3000
+
+
+// Runs React-hot-loader via our webpack dev configuration if in dev mode
+if (process.env.NODE_ENV !== 'production') {
+  const compiler = webpack(config);
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath })); // noInfo flag prevents webpacks (verbose) default console logs and only logs errors and warnings
+  app.use(webpackHotMiddleware(compiler));
+}
 
 
 // Request parsing middleware

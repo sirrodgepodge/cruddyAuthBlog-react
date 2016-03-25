@@ -44,7 +44,7 @@ module.exports = (app) => {
     // Gets user off session if logged in
     app.get('/auth/session', (req, res) =>
         !req.user ?
-        res.status(401).send('No authenticated user.') :
+        res.status(200).send('') :
         res.status(200).json(_.merge(_.omit(req.user.toObject(), ['password','salt']),{
           hasPassword: !!req.user.password
         }))
