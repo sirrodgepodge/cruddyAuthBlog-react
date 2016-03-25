@@ -49,6 +49,7 @@ class Navbar extends Component {
                   &&
                   <input className="nav-input" ref="email" id="email" placeholder="email" type="text"/>
                 }
+                {/*Repeating logic the the two below because of some CSS annoying-ness*/}
                 {
                   (!user || !user.hasPassword)
                   &&
